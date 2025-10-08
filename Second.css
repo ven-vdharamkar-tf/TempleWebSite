@@ -1,0 +1,290 @@
+/* ===== RESET ===== */
+
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Poppins','Noto Serif',serif; color:#3a2e1f; background:url('https://i.ibb.co/wyDL7Hh/temple-bg-pattern.png'),#fffaf3; background-attachment:fixed; background-size:cover; scroll-behavior:smooth; }
+a { text-decoration:none; color:inherit; transition:0.3s; }
+a:hover { color:#b85c38; }
+
+.section {
+  scroll-margin-top: 80px; 
+}
+
+/* ===== NAVBAR ===== */
+
+
+.site-header { background:linear-gradient(90deg,#f3e0c3,#fff4e0); box-shadow:0 3px 10px rgba(0,0,0,0.1); position:sticky; top:0; z-index:10; }
+.navbar { display:flex; justify-content:space-between; align-items:center; padding:1rem 5%; }
+.logo { font-family:'Cinzel Decorative',serif; font-size:1.8rem; color:#8b4513; }
+nav ul { list-style:none; display:flex; gap:1.2rem; }
+nav li a { padding:0.5rem 1rem; border-radius:20px; font-weight:500; }
+nav li a:hover, nav li a.active { background:#f6dcbf; color:#7a3010; }
+
+/* ===== HERO/Home ===== */
+/* Hero section */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 90vh; /* almost full screen */
+  overflow: hidden;
+}
+
+/* Local video styling */
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* cover entire hero area */
+  transform: translate(-50%, -50%);
+  z-index: -1; /* behind overlay */
+}
+
+/* Overlay styling */
+.overlay {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2); /* semi-transparent overlay for text readability */
+  padding: 0 20px;
+}
+
+/* Hero text */
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+}
+
+/* Donate button styling */
+.btn-primary {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  background-color: #e63946;
+  cursor: pointer;
+}
+
+
+/*=====Services======*/
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #fffaf0, #f9f0d9);
+  color: #4a2e05;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.section {
+  padding: 3rem 1rem;
+}
+.service-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.service-btn {
+  background: linear-gradient(90deg, #b85c38, #e7a04e);
+  color: #fffaf3;
+  border: none;
+  border-radius: 30px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.service-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(90deg, #9a431e, #cc8b32);
+}
+
+.service-description {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.service-card {
+  background: #fff7f0;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.service-card img {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+/* ===== SECTIONS ===== */
+
+
+.section { padding:4rem 0; }
+.content-card { background:rgba(255,245,225,0.95); border-left:6px solid #d8a25e; border-radius:10px; margin:0 auto 2rem auto; padding:2rem; max-width:1000px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+h2 { font-family:'Cinzel',serif; color:#7a3010; margin-bottom:1rem; border-bottom:2px solid #e7c27d; display:inline-block; padding-bottom:0.3rem; }
+
+
+
+/* ===== GALLERY ===== */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+
+  /* Transition for smooth pop effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.gallery-grid img:hover {
+  transform: scale(1.5);        /* Slight zoom */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Shadow */
+  z-index: 10;                  /* Bring image above others */
+  cursor: pointer;              /* Show pointer on hover */
+}
+
+
+.btn-primary {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  background-color: #e63946;
+}
+
+/* ===== DONATION FORM ===== */
+
+#donate {
+  background: linear-gradient(180deg, #fff8e1 0%, #fff3d0 100%);
+  border-left: 6px solid #d8a25e;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+#donate h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  color: #7a3010;
+  margin-bottom: 0.8rem;
+}
+
+#donate p {
+  font-size: 1.1rem;
+  color: #4a2e05;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+.donation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.donation-form input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.donation-form button {
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.donation-form button:hover {
+  background-color: #a93226;
+}
+
+.donation-message {
+  margin-top: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+
+#qr-box img {
+  border: 2px solid #eee;
+  border-radius: 12px;
+}
+
+
+/* ===== FOOTER ===== */
+
+.site-footer {
+  background: rgba(40, 20, 10, 0.6); /* Transparent brownish tone */
+  color: #f8f5f2;
+  text-align: center;
+  padding: 0.8rem 0; /* Smaller height */
+  font-size: 0.9rem;
+  backdrop-filter: blur(6px); /* Glassy look */
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+}
