@@ -1,3 +1,24 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const navUl = document.querySelector('nav ul');
+
+  hamburger.addEventListener('click', () => {
+    navUl.classList.toggle('show');
+    hamburger.classList.toggle('open');
+  });
+
+  // Optional: Close menu when clicking a nav link (for better UX)
+  document.querySelectorAll('nav ul li a').forEach(link => {
+    link.addEventListener('click', () => {
+      if(navUl.classList.contains('show')) {
+        navUl.classList.remove('show');
+        hamburger.classList.remove('open');
+      }
+    });
+  });
+});
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
   // ===== NAVBAR ACTIVE LINK =====
@@ -19,11 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===== GALLERY =====
   const gallery = document.getElementById("gallery-grid");
   const images = [
-    "C://Users//ravishankar.mk//TempleWebSite//images//Pushkarni.jpg",
-    "C://Users//ravishankar.mk//TempleWebSite//images//Fort.jpg",
-    "C://Users//ravishankar.mk//TempleWebSite//images//Swamiji1.jpg",
-    "C://Users//ravishankar.mk//TempleWebSite//images//Aerial2.jpg",
-    "C://Users//ravishankar.mk//TempleWebSite//images//Swamiji2.jpg"
+    "./images/Pushkarni.jpg",
+    "./images/Fort.jpg",
+    "./images/Swamiji1.jpg",
+    "./images/Aerial2.jpg",
+    "./images/Swamiji2.jpg"
   ];
   images.forEach(src => {
     const img = document.createElement("img");
@@ -38,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     pooja: {
       title: "Daily Pooja & Aarti",
       description: "Daily Pooja & Aarti are conducted every morning and evening with Vedic chants and devotional hymns to invoke the blessings of Goddess Durga.",
-      image: "C://Users//ravishankar.mk//TempleWebSite//images//Mata.jpg"
+      image: "./images/Mata.jpg"
     },
     annadana: {
       title: "Nitya Annadana (Free Meal Service)",
@@ -48,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     goushala: {
       title: "Goushala (Cow Shelter)",
       description: "The Goushala houses sacred cows that are lovingly cared for. Devotees can participate by sponsoring their feed and well-being.",
-      image: "C://Users//ravishankar.mk//TempleWebSite//images//Swamiji3.jpg"
+      image: "./images/Swamiji3.jpg"
     },
     yatri: {
       title: "Yatri Nivas (Accommodation)",

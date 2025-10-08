@@ -288,3 +288,78 @@ h2 { font-family:'Cinzel',serif; color:#7a3010; margin-bottom:1rem; border-botto
   position: relative;
   font-family: 'Poppins', sans-serif;
 }
+/* ===== Responsive Navbar and Hamburger ===== */
+.navbar {
+  padding: 1rem 5%;
+  position: relative;
+}
+
+nav ul {
+  flex-direction: row;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  width: 30px;
+  height: 22px;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  background-color: #8b4513;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  nav ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: linear-gradient(90deg, #f3e0c3, #fff4e0);
+    flex-direction: column;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  nav ul.show {
+    max-height: 300px; /* enough for all links */
+  }
+
+  nav li a {
+    padding: 1rem 2rem;
+    display: block;
+    border-radius: 0;
+    border-bottom: 1px solid #e7c27d;
+  }
+
+  nav li:last-child a {
+    border-bottom: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Optional: Animate hamburger to cross when open */
+  .hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+}
