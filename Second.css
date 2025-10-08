@@ -334,7 +334,7 @@ nav ul {
   }
 
   nav ul.show {
-    max-height: 300px; /* enough for all links */
+   max-height: 400px; /* enough for all links */
   }
 
   nav li a {
