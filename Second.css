@@ -10,6 +10,15 @@ a:hover { color:#b85c38; }
   scroll-margin-top: 80px; 
 }
 
+.site-logo {
+  height: 70px;      /* adjust size as needed */
+  width: auto;
+  vertical-align: middle;
+  margin-right: 10px; /* spacing between logo and text */
+}
+
+
+
 /* ===== NAVBAR ===== */
 
 
@@ -71,6 +80,24 @@ nav li a:hover, nav li a.active { background:#f6dcbf; color:#7a3010; }
   text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
 }
 
+/* ===== HISTORY TEXT STYLING ===== */
+#history p {
+  text-align: justify;        /* Justified alignment for neat edges */
+  line-height: 1.8;           /* More spacing between lines for readability */
+  margin-bottom: 1.2rem;      /* Space between paragraphs */
+  font-size: 1.1rem;          /* Slightly bigger for reading */
+  color: #4a2e05;             /* Dark brown for easy reading */
+}
+
+#history h2 {
+  text-align: center;          /* Center the heading */
+  font-family: 'Cinzel', serif;
+  color: #7a3010;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+
 /* Donate button styling */
 .btn-primary {
   background-color: #ff4d4d;
@@ -90,6 +117,7 @@ nav li a:hover, nav li a.active { background:#f6dcbf; color:#7a3010; }
 
 
 /*=====Services======*/
+
 body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(180deg, #fffaf0, #f9f0d9);
@@ -99,8 +127,16 @@ body {
   text-align: center;
 }
 
+
 .section {
   padding: 3rem 1rem;
+}
+.service-card {
+  background: #fff7f0;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
 }
 .service-buttons {
   display: flex;
@@ -120,6 +156,13 @@ body {
   cursor: pointer;
   font-weight: 600;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+.service-card {
+  background: #fff7f0;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
 }
 
@@ -156,6 +199,24 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ===== CONTACT TEXT STYLING ===== */
+#contact p {
+  text-align: justify;        /* Justified text for neat edges */
+  line-height: 1.8;           /* Better spacing between lines */
+  margin-bottom: 1rem;        /* Space between lines */
+  font-size: 1.1rem;          /* Readable font size */
+  color: #4a2e05;             /* Dark brown for easy reading */
+}
+
+#contact h2 {
+  text-align: center;          /* Center the heading */
+  font-family: 'Cinzel', serif;
+  color: #7a3010;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
 }
 
 
@@ -268,6 +329,31 @@ h2 { font-family:'Cinzel',serif; color:#7a3010; margin-bottom:1rem; border-botto
   font-weight: 600;
   text-align: center;
 }
+/* Style dropdown like donation inputs */
+#donation-type {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fffaf3; /* match your input background */
+  color: #3a2e1f; /* match text color */
+  appearance: none; /* remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Optional: add a custom arrow */
+#donation-type {
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"><polygon points="0,0 12,0 6,6" fill="%237a3010"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
 
 #qr-box img {
   border: 2px solid #eee;
@@ -287,4 +373,81 @@ h2 { font-family:'Cinzel',serif; color:#7a3010; margin-bottom:1rem; border-botto
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   position: relative;
   font-family: 'Poppins', sans-serif;
+}
+/* ===== Responsive Navbar and Hamburger ===== */
+.navbar {
+  padding: 1rem 5%;
+  position: relative;
+}
+
+nav ul {
+  flex-direction: row;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  width: 30px;
+  height: 22px;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  background-color: #8b4513;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  nav ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: linear-gradient(90deg, #f3e0c3, #fff4e0);
+    flex-direction: column;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  nav ul.show {
+   max-height: 400px; /* enough for all links */
+  }
+
+  nav li a {
+    padding: 1rem 2rem;
+    display: block;
+    border-radius: 0;
+    border-bottom: 1px solid #e7c27d;
+  }
+
+  nav li:last-child a {
+    border-bottom: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  
+
+  /* Optional: Animate hamburger to cross when open */
+  .hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
 }
