@@ -500,10 +500,6 @@ h2 { font-family:'Cinzel',serif; color:#7a3010; margin-bottom:1rem; border-botto
 }
 
 
-#qr-box img {
-  border: 2px solid #eee;
-  border-radius: 12px;
-}
 
 
 /* ===== FOOTER ===== */
@@ -678,3 +674,30 @@ nav ul {
     border-bottom: none;
   }
 }
+
+
+/* UPI Link Styling */
+#upi-box {
+  margin-top: 30px;
+  text-align: center;
+}
+
+#upi-box h3 {
+  font-size: 1.5rem;
+  color: #c0392b; /* main theme red */
+  margin-bottom: 15px;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px #f7dc6f; /* subtle golden glow */
+}
+
+#upi-link a {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e74c3c; /* slightly brighter red */
+  background: linear-gradient(90deg, #f1c40f, #e67e22); /* devotional golden-orange gradient */
+  padding: 12px 25px;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  trans
