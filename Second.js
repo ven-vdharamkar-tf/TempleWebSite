@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
 
   // ===== NAVBAR ACTIVE LINK =====
@@ -169,13 +170,52 @@ if(hamburger && navMenu){
 // ===== DONATION FORM WITH UPI + GOOGLE SHEET =====
 const donationForm = document.getElementById("donation-form");
 const message = document.getElementById("donation-message");
-const qrBox = document.getElementById("qr-box");
+const qrBox = document.getElementById("upi-box");
 const qrImgContainer = document.getElementById("qr-img-container");
 const upiLinkEl = document.getElementById("upi-link");
 
 // Replace these
 const templeUpiId = "9380057453@ybl"; // <-- replace with actual UPI ID
-const sheetUrl = "https://docs.google.com/spreadsheets/d/1kvVvaAc6OS1vw39T-1V67aWnSnfPLckCGmm7yk5pGTE/edit?usp=drivesdk"; // <-- replace with your Google Apps Script URL
+const sheetUrl = "https://script.google.com/macros/s/AKfycbz5Q8geG2f6lJMwjJmoE2LsBXdXyYuAsyv9ms9FVf4IgKbiEdozKxaO6w4y/exec"; // <-- replace with your Google Apps Script URL
+
+// ===== DONATION AMOUNT LOCK + SHOW ONLY FOR "OTHERS" =====
+const donationTypeEl = document.getElementById("donation-type");
+const donationAmountEl = document.getElementById("donation-amount");
+const amountFormGroup = donationAmountEl.closest(".form-group"); // parent div to show/hide
+
+const sevaAmounts = {
+  "kumkuma-archana": 251,
+  "lalitha": 501,
+  "abhisheka": 1001,
+  "sarva-seva": 2001,
+  "annadasoha": 10000,
+  "adoption": 11001,
+};
+
+// hide amount box initially
+amountFormGroup.style.display = "none";
+
+donationTypeEl.addEventListener("change", () => {
+  const selected = donationTypeEl.value;
+
+  if (sevaAmounts[selected]) {
+    // hide amount box for fixed seva
+    amountFormGroup.style.display = "none";
+    donationAmountEl.value = sevaAmounts[selected];
+    donationAmountEl.readOnly = true;
+  } else if (selected === "others") {
+    // show amount box only for "Others"
+    amountFormGroup.style.display = "block";
+    donationAmountEl.value = "";
+    donationAmountEl.readOnly = false;
+  } else {
+    // reset if no valid selection
+    amountFormGroup.style.display = "none";
+    donationAmountEl.value = "";
+    donationAmountEl.readOnly = false;
+  }
+});
+
 
 donationForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -185,6 +225,38 @@ donationForm.addEventListener("submit", async (e) => {
   const address = document.getElementById("donor-address").value.trim();
   const amount = Number(document.getElementById("donation-amount").value);
   const donationType = document.getElementById("donation-type").value;
+
+  const donationTypeEl = document.getElementById("donation-type");
+const donationAmountEl = document.getElementById("donation-amount");
+
+// Map seva types to fixed amounts
+const sevaAmounts = {
+  "kumkuma-archana": 251,
+  "lalitha": 501,
+  "abhisheka": 1001,
+  "sarva-seva": 2001,
+  "annadasoha": 10000,
+  "adoption": 11001,
+};
+
+donationTypeEl.addEventListener("change", () => {
+  const selected = donationTypeEl.value;
+
+  if (sevaAmounts[selected]) {
+    donationAmountEl.value = sevaAmounts[selected];
+    donationAmountEl.readOnly = true;
+    donationAmountEl.placeholder = `₹${sevaAmounts[selected]} (Fixed Amount)`;
+
+    // ✅ trigger native input event to update validation
+    const event = new Event("input", { bubbles: true });
+    donationAmountEl.dispatchEvent(event);
+  } else {
+    donationAmountEl.value = "";
+    donationAmountEl.readOnly = false;
+    donationAmountEl.placeholder = "Donation Amount (₹)";
+  }
+});
+
 
   if (!name || !contact || !address || !amount || amount < 1) {
     message.style.color = "red";
@@ -196,14 +268,13 @@ donationForm.addEventListener("submit", async (e) => {
   // Generate UPI link
   const upiLink = `upi://pay?pa=${encodeURIComponent(templeUpiId)}&pn=${encodeURIComponent("Aadishakti Durga Temple")}&tn=${encodeURIComponent("Temple Donation")}&am=${amount}&cu=INR`;
 
-  // Show QR box
-  qrBox.style.display = "block";
+  // Show UPI link box
+const upiBox = document.getElementById("upi-box");
+upiBox.style.display = "block";
 
-  // Create QR dynamically
-  qrImgContainer.innerHTML = `<img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(upiLink)}" width="200" height="200" style="border-radius:8px;">`;
-
-  // Clickable link
-  upiLinkEl.innerHTML = `<a href="${upiLink}" target="_blank" style="color:#c0392b; font-weight:600;">Click here to pay via UPI</a>`;
+// Set clickable UPI link
+const upiLinkEl = document.getElementById("upi-link");
+upiLinkEl.innerHTML = `<a href="${upiLink}" target="_blank" style="font-size:1.4rem; font-weight:700; color:#c0392b; text-decoration:underline;">Pay ₹${amount.toLocaleString()} via UPI</a>`;
 
   // Send data to Google Sheet
   try {
@@ -218,7 +289,7 @@ donationForm.addEventListener("submit", async (e) => {
   }
 
   message.style.color = "green";
-  message.innerHTML = `🙏 Thank you, ${name}!<br>Scan the QR code or click the link below to complete your donation of ₹${amount.toLocaleString()}.<br>May Goddess Durga bless you!`;
+  message.innerHTML = `🙏 Thank you, ${name}!<br>Please click the link above to complete your donation of ₹${amount.toLocaleString()}.<br>May Goddess Durga bless you!`;
 
   donationForm.reset();
 });
