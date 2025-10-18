@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
 
   // ===== NAVBAR ACTIVE LINK =====
@@ -15,8 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (link.getAttribute("href") === "#" + current) link.classList.add("active");
     });
   });
-
-  
 
   // ===== GALLERY =====
   const gallery = document.getElementById("gallery-grid");
@@ -131,27 +128,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-
   // ===== MOBILE HAMBURGER MENU =====
-const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector("nav ul");
+  const hamburger = document.querySelector(".hamburger");
+  const navMenu = document.querySelector("nav ul");
 
-if(hamburger && navMenu){
-  hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("open"); // animate hamburger
-    navMenu.classList.toggle("show");   // toggle mobile menu
-  });
-
-  // Close menu when a link is clicked
-  navMenu.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-      if(navMenu.classList.contains("show")){
-        navMenu.classList.remove("show");
-        hamburger.classList.remove("open");
-      }
+  if(hamburger && navMenu){
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("open");
+      navMenu.classList.toggle("show");
     });
-  });
-}
+
+    navMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        if(navMenu.classList.contains("show")){
+          navMenu.classList.remove("show");
+          hamburger.classList.remove("open");
+        }
+      });
+    });
+  }
 
   // ===== SMOOTH SCROLL =====
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -167,55 +162,53 @@ if(hamburger && navMenu){
   if (logo) {
     logo.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   }
-// ===== DONATION FORM WITH UPI + GOOGLE SHEET =====
+
+  // ===== DONATION FORM WITH UPI + GOOGLE SHEET =====
+  
+  // ===== DONATION FORM WITH UPI + GOOGLE SHEET =====
 const donationForm = document.getElementById("donation-form");
 const message = document.getElementById("donation-message");
 const qrBox = document.getElementById("upi-box");
-const qrImgContainer = document.getElementById("qr-img-container");
 const upiLinkEl = document.getElementById("upi-link");
-
-// Replace these
-const templeUpiId = "9380057453@ybl"; // <-- replace with actual UPI ID
-const sheetUrl = "https://script.google.com/macros/s/AKfycbz5Q8geG2f6lJMwjJmoE2LsBXdXyYuAsyv9ms9FVf4IgKbiEdozKxaO6w4y/exec"; // <-- replace with your Google Apps Script URL
-
-// ===== DONATION AMOUNT LOCK + SHOW ONLY FOR "OTHERS" =====
 const donationTypeEl = document.getElementById("donation-type");
 const donationAmountEl = document.getElementById("donation-amount");
-const amountFormGroup = donationAmountEl.closest(".form-group"); // parent div to show/hide
+const amountFormGroup = donationAmountEl.closest(".form-group");
 
+// Replace with your UPI ID and Apps Script URL
+const templeUpiId = "9380057453@ybl";
+const sheetUrl = "https://script.google.com/macros/s/AKfycbxAi7oCU_fSmOz0iYaa1e3VAw5lEBbuR5frE-_bXaRp4j44RDQ0gU-QWm0FT3x_-SQe/exec";
+
+// Fixed seva amounts
 const sevaAmounts = {
   "kumkuma-archana": 251,
   "lalitha": 501,
   "abhisheka": 1001,
   "sarva-seva": 2001,
   "annadasoha": 10000,
-  "adoption": 11001,
+  "adoption": 11001
 };
 
-// hide amount box initially
+// Hide amount box initially
 amountFormGroup.style.display = "none";
 
+// Show amount input only for "Others"
 donationTypeEl.addEventListener("change", () => {
   const selected = donationTypeEl.value;
 
   if (sevaAmounts[selected]) {
-    // hide amount box for fixed seva
     amountFormGroup.style.display = "none";
     donationAmountEl.value = sevaAmounts[selected];
     donationAmountEl.readOnly = true;
   } else if (selected === "others") {
-    // show amount box only for "Others"
     amountFormGroup.style.display = "block";
     donationAmountEl.value = "";
     donationAmountEl.readOnly = false;
   } else {
-    // reset if no valid selection
     amountFormGroup.style.display = "none";
     donationAmountEl.value = "";
     donationAmountEl.readOnly = false;
   }
 });
-
 
 donationForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -223,41 +216,16 @@ donationForm.addEventListener("submit", async (e) => {
   const name = document.getElementById("donor-name").value.trim();
   const contact = document.getElementById("donor-contact").value.trim();
   const address = document.getElementById("donor-address").value.trim();
-  const amount = Number(document.getElementById("donation-amount").value);
-  const donationType = document.getElementById("donation-type").value;
+  let amount = Number(donationAmountEl.value);
 
-  const donationTypeEl = document.getElementById("donation-type");
-const donationAmountEl = document.getElementById("donation-amount");
-
-// Map seva types to fixed amounts
-const sevaAmounts = {
-  "kumkuma-archana": 251,
-  "lalitha": 501,
-  "abhisheka": 1001,
-  "sarva-seva": 2001,
-  "annadasoha": 10000,
-  "adoption": 11001,
-};
-
-donationTypeEl.addEventListener("change", () => {
-  const selected = donationTypeEl.value;
-
-  if (sevaAmounts[selected]) {
-    donationAmountEl.value = sevaAmounts[selected];
-    donationAmountEl.readOnly = true;
-    donationAmountEl.placeholder = `₹${sevaAmounts[selected]} (Fixed Amount)`;
-
-    // ✅ trigger native input event to update validation
-    const event = new Event("input", { bubbles: true });
-    donationAmountEl.dispatchEvent(event);
-  } else {
-    donationAmountEl.value = "";
-    donationAmountEl.readOnly = false;
-    donationAmountEl.placeholder = "Donation Amount (₹)";
+  const selectedSeva = donationTypeEl.value;
+  if (!sevaAmounts[selectedSeva] && selectedSeva !== "others") {
+    amount = 0;
+  } else if (sevaAmounts[selectedSeva] && selectedSeva !== "others") {
+    amount = sevaAmounts[selectedSeva]; // fixed amount for selected seva
   }
-});
 
-
+  // Validate fields
   if (!name || !contact || !address || !amount || amount < 1) {
     message.style.color = "red";
     message.innerHTML = "⚠️ Please fill in all details and enter a valid amount.";
@@ -267,31 +235,29 @@ donationTypeEl.addEventListener("change", () => {
 
   // Generate UPI link
   const upiLink = `upi://pay?pa=${encodeURIComponent(templeUpiId)}&pn=${encodeURIComponent("Aadishakti Durga Temple")}&tn=${encodeURIComponent("Temple Donation")}&am=${amount}&cu=INR`;
+  qrBox.style.display = "block";
+  upiLinkEl.innerHTML = `<a href="${upiLink}" target="_blank" style="font-size:1.4rem; font-weight:700; color:#c0392b; text-decoration:underline;">Pay ₹${amount.toLocaleString()} via UPI</a>`;
 
-  // Show UPI link box
-const upiBox = document.getElementById("upi-box");
-upiBox.style.display = "block";
-
-// Set clickable UPI link
-const upiLinkEl = document.getElementById("upi-link");
-upiLinkEl.innerHTML = `<a href="${upiLink}" target="_blank" style="font-size:1.4rem; font-weight:700; color:#c0392b; text-decoration:underline;">Pay ₹${amount.toLocaleString()} via UPI</a>`;
-
-  // Send data to Google Sheet
+  // Send data to Google Sheets
   try {
     await fetch(sheetUrl, {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, contact, address, amount, donationType })
+      body: JSON.stringify({ name, contact, address, amount })
+
     });
   } catch (err) {
     console.log("Error sending to Google Sheets:", err);
   }
 
+  // Success message
   message.style.color = "green";
   message.innerHTML = `🙏 Thank you, ${name}!<br>Please click the link above to complete your donation of ₹${amount.toLocaleString()}.<br>May Goddess Durga bless you!`;
 
+  // Reset form but keep donationType and amount hidden correctly
   donationForm.reset();
+  amountFormGroup.style.display = "none";
 });
 
 
